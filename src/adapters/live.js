@@ -41,14 +41,13 @@ const authenticate = async token => {
   }
 };
 
-const getAllWithdrawals = async () => {
+const getAllBookings = async params => {
   try {
-    const response = await instance.get('/withdrawals');
+    const response = await instance.get('/bookings', { params });
     return response.data;
   } catch (error) {
     return errorCallback(error);
   }
 };
 
-
-export default { login, authenticate, getAllWithdrawals };
+export default { login, authenticate, getAllBookings };
