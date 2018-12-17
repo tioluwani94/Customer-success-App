@@ -5,7 +5,7 @@ import { TableRow, TableList } from '../components/List';
 const components = storiesOf('Components', module);
 
 components.add('ListItem', () => (
-  <TableRow data={['Tioluwani', 'Kolawole', 5, 'ongoing', 0]} />
+  <TableRow data={['Tioluwani', 'Kolawole', 5, 'ongoing', 0]} style={[]} />
 ));
 components.add('Table list', () => (
   <TableList
