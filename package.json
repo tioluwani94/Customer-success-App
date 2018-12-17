@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@storybook/react": "^4.1.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1"
@@ -23,5 +22,13 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@storybook/addon-actions": "^4.1.2",
+    "@storybook/addon-links": "^4.1.2",
+    "@storybook/addons": "^4.1.2",
+    "@storybook/react": "^4.1.2",
+    "babel-loader": "^8.0.4"
+  }
 }
