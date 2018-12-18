@@ -1,32 +1,9 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Box, Flex, Button, Text, Link } from '@rebass/emotion';
-
-export const Table = ({ columns, data }) => {
-  return (
-    <table>
-      <thead>
-        <td>
-          {columns.map((item, i) => (
-            <th key={i.toString()}>{item}</th>
-          ))}
-          <th />
-        </td>
-      </thead>
-      <tbody>
-        {data.map(item => {
-          return (
-            <td>
-              <tr>{item}</tr>
-            </td>
-          );
-        })}
-      </tbody>
-    </table>
-  );
-};
+import { AsLink } from '../shared/primitives/Button';
 
 const ListItemCell = styled(Box)`
   flex: ${props => props.width};
@@ -38,19 +15,20 @@ const ListItemCell = styled(Box)`
   overflow: hidden;
   white-space: nowrap;`
       : ``}
+  text-transform: ${props => (props.isCapitalized ? 'capitalize' : 'inherit')};
 
   @media (max-width: ${props => props.hideAt}) {
     display: none;
   }
 `;
 
-const TABLE_CONFIG = [
-  { width: '30%', isEllipsis: true },
-  { width: '30%', hideAt: '620px', isEllipsis: true },
-  { width: '10%', hideAt: '840px' },
-  { width: '10%' },
-  { width: '20%', hideAt: '960px' },
-];
+const StyledTableList = styled.div`
+  a:last-of-type {
+    .TableRow {
+      border-bottom: none;
+    }
+  }
+`;
 
 export const TableRow = ({ data, isHeader, style }) => {
   let columnStyle = isHeader
@@ -59,34 +37,52 @@ export const TableRow = ({ data, isHeader, style }) => {
         fontWeight: 'bold',
       }
     : {};
+  let Container = isHeader ? Fragment : AsLink;
   return (
-    <Flex
-      alignItems="center"
-      justifyContent="space-between"
-      flexWrap="wrap"
-      css={css`
-        border-bottom: 1px solid #e8e8e8;
-      `}
-      px="8px"
-      py="16px"
+    <Container
+      to="#"
+      style={`
+      display: block;
+      :hover {
+        background-color: #f8f8f8;
+      }
+    `}
     >
-      {data.map((item, i) => (
-        <ListItemCell key={i.toString()} css={columnStyle} {...style[i]}>
-          {item}
-        </ListItemCell>
-      ))}
-    </Flex>
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        flexWrap="wrap"
+        css={css`
+          border-bottom: 1px solid #e8e8e8;
+        `}
+        px="8px"
+        py="16px"
+      >
+        {data.map((item, i) => (
+          <ListItemCell key={i.toString()} css={columnStyle} {...style[i]}>
+            {item}
+          </ListItemCell>
+        ))}
+      </Flex>
+    </Container>
   );
 };
 
-export const TableList = ({ data, columns }) => {
+export const TableList = ({ data, columns, style }) => {
   return (
-    <React.Fragment>
-      <TableRow data={columns} isHeader style={TABLE_CONFIG} />
+    <StyledTableList>
+      <TableRow data={columns} isHeader style={style} />
       {data.map((item, i) => {
         let itemValues = Object.values(item);
-        return <TableRow data={itemValues} style={TABLE_CONFIG} />;
+        return (
+          <TableRow
+            key={i.toString()}
+            data={itemValues}
+            style={style}
+            className="TableRow"
+          />
+        );
       })}
-    </React.Fragment>
+    </StyledTableList>
   );
 };

@@ -9,7 +9,7 @@ const authenticate = token => {
   return new Promise(resolve => resolve(true));
 };
 
-const getAllBookings = () => {
+const getAllBookings = (params) => {
   return new Promise(resolve => setTimeout(resolve, 3000, testDataBookings));
 };
 

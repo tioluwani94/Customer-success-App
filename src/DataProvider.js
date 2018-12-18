@@ -34,6 +34,7 @@ export class DataProvider extends React.Component {
         auth: false,
         bookings: [],
         booking: {},
+        loading: false,
       },
       dispatch: this.dispatch,
       actions,
@@ -42,9 +43,9 @@ export class DataProvider extends React.Component {
   getAdapter() {
     return this.props.adapter;
   }
-  componentDidMount() {
-    this.fetchBookings();
-  }
+  // componentDidMount() {
+  //   this.fetchBookings();
+  // }
   updateState = obj => {
     let { context } = this.state;
     this.setState({
@@ -79,17 +80,18 @@ export class DataProvider extends React.Component {
         this.updateState({ auth: true });
       });
   };
-  fetchBookings = refresh => {
+  fetchBookings = (refresh, params) => {
     let { bookings } = this.state.context.state;
     if (!Boolean(refresh) && bookings.length > 0) {
       return new Promise(resolve => resolve(bookings));
     }
+    this.updateState({ loading: true })
     return this.getAdapter()
-      .getAllBookings()
+      .getAllBookings(params)
       .then(data => {
-        console.log(data);
-        this.updateState({ bookings: data });
-        return data;
+        const { bookings } = data;
+        this.updateState({ bookings, loading: false });
+        return bookings;
       })
       .catch(err => {
         throw err;
