@@ -120,7 +120,6 @@ export const filterBookingsByStatus = status => {
 };
 
 export const searchAllBookings = search => {
-  console.log(search)
   return testDataBookings.bookings.filter(booking => {
     return (
       booking.tutor.email.toLowerCase().includes(search.toLowerCase()) ||

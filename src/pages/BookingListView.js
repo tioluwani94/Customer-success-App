@@ -67,7 +67,6 @@ export class BookingListView extends React.Component {
     if (search !== '') {
       let { dispatch, actions } = this.context;
       dispatch({ type: actions.SEARCH_BOOKINGS, value: search }).then(data => {
-        console.log(data)
         this.setState({ bookings: this.formatBookingData(data) });
       });
     } else {
