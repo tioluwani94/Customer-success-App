@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { TableRow, TableList } from '../components/List';
+import SectionHeading from '../components/SectionHeading';
 
 const components = storiesOf('Components', module);
 
@@ -20,5 +21,12 @@ components.add('Table list', () => (
       },
     ]}
     style={[]}
+  />
+));
+components.add('Section Heading', () => (
+  <SectionHeading
+    heading="Bookings - 200"
+    clientSearch={() => {}}
+    serverSearch={() => {}}
   />
 ));
