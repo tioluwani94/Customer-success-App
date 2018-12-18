@@ -63,6 +63,17 @@ export class BookingListView extends React.Component {
       this.fetchBookings(true);
     }
   };
+  searchBookings = search => {
+    if (search !== '') {
+      let { dispatch, actions } = this.context;
+      dispatch({ type: actions.SEARCH_BOOKINGS, value: search }).then(data => {
+        console.log(data)
+        this.setState({ bookings: this.formatBookingData(data) });
+      });
+    } else {
+      this.fetchBookings(true);
+    }
+  };
   render() {
     let { bookings } = this.state;
     let { loading } = this.context.state;
@@ -71,11 +82,11 @@ export class BookingListView extends React.Component {
         <SectionHeading
           heading={`Bookings - ${bookings.length}`}
           filters={['Scheduled', 'Delivered', 'Initialized', 'Worked On']}
-          clientSearch={() => {}}
+          clientSearch={this.searchBookings}
           serverSearch={() => {}}
           clientFilter={this.filterBookings}
           serverFilter={() => {}}
-          filterPlaceholder="All "
+          filterPlaceholder="All"
         />
         {loading ? (
           <HomePageSpinner />

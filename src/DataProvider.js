@@ -14,6 +14,7 @@ const actions = {
   GET_BOOKINGS: 'GET_BOOKINGS',
   GET_BOOKING: 'GET_BOOKING',
   FILTER_BOOKINGS: 'FILTER_BOOKINGS',
+  SEARCH_BOOKINGS: 'SEARCH_BOOKINGS',
 };
 
 export class DataProvider extends React.Component {
@@ -24,6 +25,7 @@ export class DataProvider extends React.Component {
       [actions.LOGIN_USER]: this.loginUser,
       [actions.GET_BOOKINGS]: this.fetchBookings,
       [actions.FILTER_BOOKINGS]: this.filterBookings,
+      [actions.SEARCH_BOOKINGS]: this.searchBookings,
     };
     if (this.props.test) {
       console.log(action);
@@ -115,6 +117,17 @@ export class DataProvider extends React.Component {
   filterBookings = status => {
     return this.getAdapter()
       .filterBookings(status)
+      .then(data => {
+        this.updateState({ bookings: data });
+        return data;
+      })
+      .catch(err => {
+        throw err;
+      });
+  };
+  searchBookings = search => {
+    return this.getAdapter()
+      .searchBookings(search)
       .then(data => {
         this.updateState({ bookings: data });
         return data;

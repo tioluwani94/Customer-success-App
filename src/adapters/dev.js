@@ -1,4 +1,9 @@
-import { testDataBookings, testDataGetBooking, filterBookingsByStatus } from './test_data';
+import {
+  testDataBookings,
+  testDataGetBooking,
+  filterBookingsByStatus,
+  searchAllBookings,
+} from './test_data';
 let token = 'TESTDATATOKEN';
 
 const login = (email, password) => {
@@ -9,22 +14,27 @@ const authenticate = token => {
   return new Promise(resolve => resolve(true));
 };
 
-const getAllBookings = (params) => {
+const getAllBookings = params => {
   return new Promise(resolve => resolve(testDataBookings));
 };
 
 const getBooking = order => {
-  return new Promise(resolve => resolve(testDataGetBooking(order)))
-}
+  return new Promise(resolve => resolve(testDataGetBooking(order)));
+};
 
 const filterBookings = status => {
-  return new Promise(resolve => resolve(filterBookingsByStatus(status)))
-}
+  return new Promise(resolve => resolve(filterBookingsByStatus(status)));
+};
+
+const searchBookings = search => {
+  return new Promise(resolve => resolve(searchAllBookings(search)));
+};
 
 export default {
   login,
   authenticate,
   getAllBookings,
   getBooking,
-  filterBookings
+  filterBookings,
+  searchBookings,
 };

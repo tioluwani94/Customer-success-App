@@ -114,9 +114,18 @@ export const testDataGetBooking = order => {
 };
 
 export const filterBookingsByStatus = status => {
-  let left = testDataBookings.bookings.filter(
+  return testDataBookings.bookings.filter(
     booking => booking.status.toLowerCase() === status.toLowerCase()
   );
-  console.log(left)
-  return left
+};
+
+export const searchAllBookings = search => {
+  console.log(search)
+  return testDataBookings.bookings.filter(booking => {
+    return (
+      booking.tutor.email.toLowerCase().includes(search.toLowerCase()) ||
+      booking.client.email.toLowerCase().includes(search.toLowerCase()) ||
+      booking.order.toLowerCase().includes(search.toLowerCase())
+    );
+  });
 };

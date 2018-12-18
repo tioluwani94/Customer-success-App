@@ -37,7 +37,8 @@ class SectionHeading extends React.Component {
       isClientSearch: e.target.checked,
     });
   };
-  handleSearch = () => {
+  handleSearch = e => {
+    e.preventDefault();
     const { search, isClientSearch } = this.state;
     if (isClientSearch) {
       this.props.clientSearch(search);
@@ -72,7 +73,7 @@ class SectionHeading extends React.Component {
         <Box className="SectionHeading__heading" width={1 / 5} mr="16px">
           <Heading>{heading}</Heading>
         </Box>
-        <Flex mr="16px" alignItems="center" >
+        <Flex mr="16px" alignItems="center">
           <Input
             type="checkbox"
             onChange={this.onClientSearchChange}
