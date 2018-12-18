@@ -37,6 +37,7 @@ export const Input = ({
   id,
   type,
   placeholder,
+  checked,
   ...rest
 }) => {
   return (
@@ -49,6 +50,7 @@ export const Input = ({
         type={type}
         id={id}
         placeholder={placeholder}
+        checked={checked}
       />
       {error && (
         <Text color={red} mt={4}>

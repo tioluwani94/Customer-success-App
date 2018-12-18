@@ -41,7 +41,7 @@ export const testDataBookings = {
           transaction_type: '',
         },
       ],
-      status: 'ongoing',
+      status: 'scheduled',
       createdAt: 1528758000000,
       updatedAt: 1545045658609,
     },
@@ -100,9 +100,23 @@ export const testDataBookings = {
           transaction_type: '',
         },
       ],
-      status: 'ongoing',
+      status: 'initialized',
       createdAt: 1528758000000,
       updatedAt: 1545045658609,
     },
   ],
+};
+
+export const testDataGetBooking = order => {
+  return testDataBookings.bookings.find(
+    booking => booking.order.toLowerCase() === order.toLowerCase()
+  );
+};
+
+export const filterBookingsByStatus = status => {
+  let left = testDataBookings.bookings.filter(
+    booking => booking.status.toLowerCase() === status.toLowerCase()
+  );
+  console.log(left)
+  return left
 };

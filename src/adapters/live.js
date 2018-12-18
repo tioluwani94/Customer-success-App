@@ -50,4 +50,13 @@ const getAllBookings = async params => {
   }
 };
 
-export default { login, authenticate, getAllBookings };
+const getBooking = async order => {
+  try {
+    const response = await instance.get(`/bookings/${order}`);
+    return response.data;
+  } catch (error) {
+    return errorCallback(error);
+  }
+};
+
+export default { login, authenticate, getAllBookings, getBooking };

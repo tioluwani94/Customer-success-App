@@ -1,9 +1,11 @@
 import React from 'react';
+import { Flex, Heading } from '@rebass/emotion';
 import { TableList } from '../components/List';
 import { DataContext } from '../DataProvider';
 import { format } from 'date-fns';
 import { Panel } from '../shared/reuseable';
 import { HomePageSpinner } from '../shared/primitives/Spinner';
+import SectionHeading from '../components/SectionHeading';
 
 const columns = [
   'Client email',
@@ -51,15 +53,47 @@ export class BookingListView extends React.Component {
       date: formatDate(booking.createdAt),
     }));
   };
+  filterBookings = status => {
+    if (status !== '') {
+      let { dispatch, actions } = this.context;
+      dispatch({ type: actions.FILTER_BOOKINGS, value: status }).then(data => {
+        this.setState({ bookings: this.formatBookingData(data) });
+      });
+    } else {
+      this.fetchBookings(true);
+    }
+  };
   render() {
     let { bookings } = this.state;
     let { loading } = this.context.state;
-    return loading ? (
-      <HomePageSpinner/>
-    ) : bookings.length > 0 ? (
-      <Panel>
-        <TableList columns={columns} data={bookings} style={TABLE_CONFIG} />
-      </Panel>
-    ) : null;
+    return (
+      <React.Fragment>
+        <SectionHeading
+          heading={`Bookings - ${bookings.length}`}
+          filters={['Scheduled', 'Delivered', 'Initialized', 'Worked On']}
+          clientSearch={() => {}}
+          serverSearch={() => {}}
+          clientFilter={this.filterBookings}
+          serverFilter={() => {}}
+          filterPlaceholder="All "
+        />
+        {loading ? (
+          <HomePageSpinner />
+        ) : bookings.length > 0 ? (
+          <Panel mt="64px">
+            <TableList columns={columns} data={bookings} style={TABLE_CONFIG} />
+          </Panel>
+        ) : (
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            my="100px"
+          >
+            <Heading>No Bookings</Heading>
+          </Flex>
+        )}
+      </React.Fragment>
+    );
   }
 }

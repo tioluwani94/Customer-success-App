@@ -13,6 +13,7 @@ const actions = {
   LOGIN_USER: 'LOGIN_USER',
   GET_BOOKINGS: 'GET_BOOKINGS',
   GET_BOOKING: 'GET_BOOKING',
+  FILTER_BOOKINGS: 'FILTER_BOOKINGS',
 };
 
 export class DataProvider extends React.Component {
@@ -22,6 +23,7 @@ export class DataProvider extends React.Component {
       [actions.AUTHENTICATE]: this.authenticateUser,
       [actions.LOGIN_USER]: this.loginUser,
       [actions.GET_BOOKINGS]: this.fetchBookings,
+      [actions.FILTER_BOOKINGS]: this.filterBookings,
     };
     if (this.props.test) {
       console.log(action);
@@ -85,13 +87,37 @@ export class DataProvider extends React.Component {
     if (!Boolean(refresh) && bookings.length > 0) {
       return new Promise(resolve => resolve(bookings));
     }
-    this.updateState({ loading: true })
     return this.getAdapter()
       .getAllBookings(params)
       .then(data => {
         const { bookings } = data;
-        this.updateState({ bookings, loading: false });
+        this.updateState({ bookings });
         return bookings;
+      })
+      .catch(err => {
+        throw err;
+      });
+  };
+  fetchBooking = (refresh, order) => {
+    let { booking } = this.state.context.state;
+    if (!Boolean(refresh) && Object.values(booking).length > 0) {
+      return new Promise(resolve => resolve(booking));
+    }
+    return this.getAdapter()
+      .getBooking(order)
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        throw err;
+      });
+  };
+  filterBookings = status => {
+    return this.getAdapter()
+      .filterBookings(status)
+      .then(data => {
+        this.updateState({ bookings: data });
+        return data;
       })
       .catch(err => {
         throw err;
