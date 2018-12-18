@@ -86,3 +86,7 @@ export const TableList = ({ data, columns, style }) => {
     </StyledTableList>
   );
 };
+
+TableList.defaultProps = {
+  style: [],
+};
