@@ -19,5 +19,6 @@ components.add('Table list', () => (
         date: 'March 13, 2018',
       },
     ]}
+    style={[]}
   />
 ));
