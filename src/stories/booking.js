@@ -50,7 +50,7 @@ const bookings = storiesOf("Bookings", module);
 bookings.add("Booking List View", () => (
     
     <WithRouter initialIndex={1}>
-      <ProtectedRoute
+      <Route
         path="/bookings"
         exact
         render={() => {
