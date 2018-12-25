@@ -124,15 +124,25 @@ export class BookingDetailView extends Component {
           )}
         </DetailViewSection>
         <DetailViewSection heading="Reviews">
-          {reviews.length > 0 ? (
-            reviews.map((review, i) => (
-              <Review {...review} key={i.toString()} />
-            ))
-          ) : (
-            <EmptyState>
-              <Heading>No Reviews</Heading>
-            </EmptyState>
-          )}
+          <Box
+            css={css`
+              .review {
+                &:last-child {
+                  border-bottom: none;
+                }
+              }
+            `}
+          >
+            {reviews.length > 0 ? (
+              reviews.map((review, i) => (
+                <Review {...review} key={i.toString()} />
+              ))
+            ) : (
+              <EmptyState>
+                <Heading>No Reviews</Heading>
+              </EmptyState>
+            )}
+          </Box>
         </DetailViewSection>
         <DetailViewSection heading="Remarks">
           <form onSubmit={this.submitRemark}>

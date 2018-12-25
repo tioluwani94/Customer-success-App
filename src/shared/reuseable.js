@@ -148,6 +148,7 @@ export const Review = ({ tutor, commenter, review, date, score }) => (
     css={css`
       border-bottom: 1px solid #e8e8e8;
     `}
+    className="review"
   >
     <Flex alignItems="center" pb="4px">
       <Text pr="8px">{commenter}</Text>
