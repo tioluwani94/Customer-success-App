@@ -42,6 +42,14 @@ export const testDataBookings = {
           transaction_type: 'card',
         },
       ],
+      remarks: [
+        {
+          title: 'Closed account',
+          date: 1545045658609,
+          content:
+            'Lorem Khaled Ipsum is a major key to success. Find peace, life is like a water fall, you’ve gotta flow.',
+        },
+      ],
       status: 'scheduled',
       createdAt: 1528758000000,
       updatedAt: 1545045658609,

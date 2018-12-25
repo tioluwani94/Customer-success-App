@@ -129,6 +129,32 @@ bookings.add('Booking Detail View', () => (
                   transaction_type: 'card',
                 },
               ],
+              remarks: [
+                {
+                  title: 'Closed account',
+                  date: 1545045658609,
+                  content:
+                    'Lorem Khaled Ipsum is a major key to success. Find peace, life is like a water fall, you’ve gotta flow.',
+                },
+                {
+                  title: 'Closed account',
+                  date: 1545045658609,
+                  content:
+                    'Lorem Khaled Ipsum is a major key to success. Find peace, life is like a water fall, you’ve gotta flow.',
+                },
+                {
+                  title: 'Closed account',
+                  date: 1545045658609,
+                  content:
+                    'Lorem Khaled Ipsum is a major key to success. Find peace, life is like a water fall, you’ve gotta flow.',
+                },
+                {
+                  title: 'Closed account',
+                  date: 1545045658609,
+                  content:
+                    'Lorem Khaled Ipsum is a major key to success. Find peace, life is like a water fall, you’ve gotta flow.',
+                },
+              ],
               reviews: [
                 {
                   tutor: 'james.sowore@gmail.com',

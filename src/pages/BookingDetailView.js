@@ -3,10 +3,16 @@ import React, { Component } from 'react';
 import styled from '@emotion/styled';
 import { css, jsx } from '@emotion/core';
 import { Box, Heading, Button } from '@rebass/emotion';
-import { UserDetailSection, Panel, EmptyState, Review } from '../shared/reuseable';
+import {
+  UserDetailSection,
+  Panel,
+  EmptyState,
+  Review,
+} from '../shared/reuseable';
 import { TableList } from '../components/List';
 import { formatDate } from './BookingListView';
 import { TextArea } from '../shared/primitives/TextArea';
+import { TimelineList } from '../components/Timeline';
 
 const SESSION_TABLE_COLUMNS = [
   'Order',
@@ -74,7 +80,14 @@ export class BookingDetailView extends Component {
     });
   };
   render() {
-    const { tutor, client, sessions, transactions, reviews } = this.props.data;
+    const {
+      tutor,
+      client,
+      sessions,
+      transactions,
+      reviews,
+      remarks,
+    } = this.props.data;
     let formattedSessions = this.formatDataDate(sessions);
     return (
       <Box px={[3, 4]}>
@@ -132,6 +145,7 @@ export class BookingDetailView extends Component {
               Submit Remark
             </Button>
           </form>
+          <Box mt="32px">{remarks && <TimelineList timelines={remarks} />}</Box>
         </DetailViewSection>
       </Box>
     );

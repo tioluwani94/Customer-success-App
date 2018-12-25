@@ -7,6 +7,7 @@ import {
   RatingComponent,
   Review,
 } from '../shared/reuseable';
+import { TimelineList } from '../components/Timeline';
 
 const components = storiesOf('Components', module);
 
@@ -59,5 +60,33 @@ components.add('Review Compnent', () => (
       date: 1545045658609,
       score: 5,
     }}
+  />
+));
+components.add('Timeline Component', () => (
+  <TimelineList
+    timelines={[
+      {
+        title: 'Closed account',
+        date: 1545045658609,
+        content:
+          'Lorem Khaled Ipsum is a major key to success. Find peace, life is like a water fall, you’ve gotta flow.',
+      },
+      {
+        content:
+          'Lorem Khaled Ipsum is a major key to success. Find peace, life is like a water fall, you’ve gotta flow.',
+      },
+      {
+        content:
+          'Lorem Khaled Ipsum is a major key to success. Find peace, life is like a water fall, you’ve gotta flow.',
+      },
+      {
+        content:
+          'Lorem Khaled Ipsum is a major key to success. Find peace, life is like a water fall, you’ve gotta flow.',
+      },
+      {
+        content:
+          'Lorem Khaled Ipsum is a major key to success. Find peace, life is like a water fall, you’ve gotta flow.',
+      },
+    ]}
   />
 ));
