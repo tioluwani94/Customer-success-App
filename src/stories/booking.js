@@ -6,6 +6,7 @@ import { DataContext, DataProvider } from '../DataProvider';
 import ProtectedRoute from '../shared/ProtectedRoutes';
 import { LoginPage } from '../shared/LoginPage';
 import { BookingListView } from '../pages/BookingListView';
+import { BookingDetailView } from '../pages/BookingDetailView';
 
 const WithRouter = ({ children, initialIndex = 0, test = true }) => {
   return (
@@ -15,7 +16,10 @@ const WithRouter = ({ children, initialIndex = 0, test = true }) => {
       adapter={devAdapter}
       authenticateUser={token => new Promise(resolve => resolve(true))}
     >
-      <Router initialEntries={['/login', '/bookings']} initialIndex={initialIndex}>
+      <Router
+        initialEntries={['/login', '/bookings', '/bookings/:order']}
+        initialIndex={initialIndex}
+      >
         <Switch>
           <Route
             path="/login"
@@ -45,27 +49,29 @@ const WithRouter = ({ children, initialIndex = 0, test = true }) => {
   );
 };
 
-const bookings = storiesOf("Bookings", module);
+const bookings = storiesOf('Bookings', module);
 
-bookings.add("Booking List View", () => (
-    
-    <WithRouter initialIndex={1}>
-      <Route
-        path="/bookings"
-        exact
-        render={() => {
-          return <BookingListView />;
-        }}
-      />
-      {/* <ProtectedRoute
-        path="/bookings/:order"
-        render={props => (
-          <WDetailPage
-            getWithdrawal={order => testData().find(x => x.order === order)}
-            transactions={testDataTransactions()}
-            {...props}
-          />
-        )}
-      /> */}
-    </WithRouter>
-))
+bookings.add('Booking List View', () => (
+  <WithRouter initialIndex={1}>
+    <Route
+      path="/bookings"
+      exact
+      render={props => {
+        return <BookingListView  {...props}/>;
+      }}
+    />
+    <Route exact path="/bookings/:order" render={() => (<BookingDetailView/>)}/>
+  </WithRouter>
+));
+
+bookings.add('Booking Detail View', () => (
+  <WithRouter initialIndex={1}>
+    <Route
+      path="/bookings"
+      exact
+      render={props => {
+        return <BookingDetailView {...props} />;
+      }}
+    />
+  </WithRouter>
+));

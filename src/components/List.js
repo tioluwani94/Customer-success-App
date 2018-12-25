@@ -30,7 +30,7 @@ const StyledTableList = styled.div`
   }
 `;
 
-export const TableRow = ({ data, isHeader, style }) => {
+export const TableRow = ({ data, isHeader, style, onClick, to }) => {
   let columnStyle = isHeader
     ? {
         textTransform: 'capitalize',
@@ -40,13 +40,14 @@ export const TableRow = ({ data, isHeader, style }) => {
   let Container = isHeader ? Fragment : AsLink;
   return (
     <Container
-      to="#"
+      to={to}
       style={`
       display: block;
       :hover {
         background-color: #f8f8f8;
       }
     `}
+      onClick={onClick}
     >
       <Flex
         alignItems="center"
@@ -68,7 +69,7 @@ export const TableRow = ({ data, isHeader, style }) => {
   );
 };
 
-export const TableList = ({ data, columns, style }) => {
+export const TableList = ({ data, columns, style, onRowClick, to }) => {
   return (
     <StyledTableList>
       <TableRow data={columns} isHeader style={style} />
@@ -80,6 +81,8 @@ export const TableList = ({ data, columns, style }) => {
             data={itemValues}
             style={style}
             className="TableRow"
+            onClick={() => onRowClick(item.order)}
+            to={to}
           />
         );
       })}

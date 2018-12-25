@@ -73,6 +73,9 @@ export class BookingListView extends React.Component {
       this.fetchBookings(true);
     }
   };
+  goToBookingPage = (order) => {
+    this.props.history.push(`/booking/${order}`)
+  }
   render() {
     let { bookings } = this.state;
     let { loading } = this.context.state;
@@ -91,7 +94,12 @@ export class BookingListView extends React.Component {
           <HomePageSpinner />
         ) : bookings.length > 0 ? (
           <Panel mt="64px">
-            <TableList columns={columns} data={bookings} style={TABLE_CONFIG} />
+            <TableList
+              columns={columns}
+              data={bookings}
+              style={TABLE_CONFIG}
+              onRowClick={this.goToBookingPage}
+            />
           </Panel>
         ) : (
           <Flex
