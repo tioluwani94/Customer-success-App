@@ -3,7 +3,7 @@ import { Flex, Heading } from '@rebass/emotion';
 import { TableList } from '../components/List';
 import { DataContext } from '../DataProvider';
 import { format } from 'date-fns';
-import { Panel } from '../shared/reuseable';
+import { Panel, EmptyState } from '../shared/reuseable';
 import { HomePageSpinner } from '../shared/primitives/Spinner';
 import SectionHeading from '../components/SectionHeading';
 
@@ -16,7 +16,7 @@ const columns = [
   'Date',
 ];
 
-const formatDate = date => {
+export const formatDate = date => {
   return format(new Date(date), 'MMMM M, GGGG');
 };
 
@@ -73,9 +73,9 @@ export class BookingListView extends React.Component {
       this.fetchBookings(true);
     }
   };
-  goToBookingPage = (order) => {
-    this.props.history.push(`/booking/${order}`)
-  }
+  goToBookingPage = item => {
+    this.props.history.push(`/booking/${item.order}`);
+  };
   render() {
     let { bookings } = this.state;
     let { loading } = this.context.state;
@@ -102,14 +102,9 @@ export class BookingListView extends React.Component {
             />
           </Panel>
         ) : (
-          <Flex
-            justifyContent="center"
-            alignItems="center"
-            flexDirection="column"
-            my="100px"
-          >
+          <EmptyState>
             <Heading>No Bookings</Heading>
-          </Flex>
+          </EmptyState>
         )}
       </React.Fragment>
     );

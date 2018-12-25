@@ -1,16 +1,13 @@
-/** @jsx jsx */
 import React from 'react';
-import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import { Box, Flex, Text } from '@rebass/emotion';
+import { Flex } from '@rebass/emotion';
 
-const StyledInput = styled(Flex)`
+const TextAreaContainer = styled(Flex)`
   label {
     margin-bottom: 4px;
   }
-  input {
-    padding: 0 16px;
-    height: 40px;
+  textarea {
+    padding: 16px;
     font-size: 16px;
     border: 2px solid #e8e8e8;
     border-radius: 4px;
@@ -19,44 +16,43 @@ const StyledInput = styled(Flex)`
     outline: none;
 
     :hover {
-      border-color: #94BDF2;
+      border-color: #94bdf2;
     }
     :focus {
-      border-color: #0064E6;
+      border-color: #0064e6;
     }
   }
 `;
 
-export const Input = ({
+export function TextArea({
   label,
-  value,
+  placeholder,
   onChange,
-  errorMessage,
-  error,
+  value,
   name,
   id,
-  type,
-  placeholder,
-  checked,
+  rows,
+  cols,
+  error,
   ...rest
-}) => {
+}) {
   return (
-    <StyledInput flexDirection="column" {...rest}>
+    <TextAreaContainer flexDirection="column" {...rest}>
       {label && <label htmlFor={id}>{label}</label>}
-      <input
-        value={value}
+      <textarea
         name={name}
-        onChange={onChange}
-        type={type}
+        value={value}
         id={id}
+        rows={rows}
+        cols={cols}
+        onChange={onChange}
         placeholder={placeholder}
-        checked={checked}
       />
       {error && (
         <Text color={red} mt={4} fontSize="12px">
           {errorMessage}
         </Text>
       )}
-    </StyledInput>
+    </TextAreaContainer>
   );
-};
+}

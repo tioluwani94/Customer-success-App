@@ -28,7 +28,8 @@ export const testDataBookings = {
         {
           tutor: 'james.sowore@gmail.com',
           commenter: 'kolawole8tiolu@gmial.com',
-          review: 'I am satisfied',
+          review:
+            'Lorem Khaled Ipsum is a major key to success. To succeed you must believe. When you believe, you will succeed. Give thanks to the most high. Surround yourself with angels. I’m giving you cloth talk, cloth. Special cloth alert, cut from a special cloth. Give thanks to the most high. Let’s see what Chef Dee got that they don’t want us to eat. Another one. Bless up. In life you have to take the trash out, if you have trash in your life, take it out, throw it away, get rid of it, major key. We don’t see them, we will never see them',
           date: 1545045658609,
           score: 5,
         },
@@ -38,7 +39,7 @@ export const testDataBookings = {
           amount: 5000,
           credit: 0,
           type: '',
-          transaction_type: '',
+          transaction_type: 'card',
         },
       ],
       status: 'scheduled',

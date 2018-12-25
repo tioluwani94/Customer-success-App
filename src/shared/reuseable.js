@@ -3,6 +3,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Card, Flex, Heading, Text, Box } from '@rebass/emotion';
 import { jsx, css } from '@emotion/core';
+import { formatDate } from '../pages/BookingListView';
 
 export const Panel = styled(Card)`
   padding: 0 16px 16px;
@@ -62,7 +63,19 @@ const Avatar = styled(Box)`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  font-size: 24px;
 `;
+
+export const EmptyState = ({ children }) => (
+  <Flex
+    justifyContent="center"
+    alignItems="center"
+    flexDirection="column"
+    my="100px"
+  >
+    {children}
+  </Flex>
+);
 
 export const UserDetailSection = ({
   heading,
@@ -75,6 +88,7 @@ export const UserDetailSection = ({
   return (
     <Box
       pb="16px"
+      mb="32px"
       css={css`
         border-bottom: 1px solid #e8e8e8;
       `}
@@ -98,7 +112,7 @@ export const UserDetailSection = ({
           ) : (
             <Avatar className="user-avatar">{name[0]}</Avatar>
           )}
-          <Box ml={[ 0, 2, 3 ]}>
+          <Box ml={[0, 2, 3]}>
             <Heading pb="8px" fontSize="20px">
               {name}
             </Heading>
@@ -113,3 +127,47 @@ export const UserDetailSection = ({
     </Box>
   );
 };
+
+export const RatingComponent = ({ rating, color }) => {
+  const array = Array.from(Array(Math.round(rating)), (x, i) => i + 1);
+  return array.map((value, index) => (
+    <span style={{ color: color }} key={index.toString()}>
+      &#9733;
+    </span>
+  ));
+};
+RatingComponent.defaultProps = {
+  color: '#fad072',
+};
+
+export const Review = ({ tutor, commenter, review, date, score }) => (
+  <Box
+    mb="32px"
+    pb="16px"
+    css={css`
+      border-bottom: 1px solid #e8e8e8;
+    `}
+  >
+    <Flex alignItems="center" pb="4px">
+      <Text pr="8px">{commenter}</Text>
+      <RatingComponent rating={score} />
+    </Flex>
+    <Text
+      fontSize="14px"
+      css={css`
+        color: rgba(0, 0, 0, 0.6);
+      `}
+    >
+      {formatDate(date)}
+    </Text>
+    <Text
+      mt="16px"
+      lineHeight={2}
+      css={css`
+        color: rgba(0, 0, 0, 0.8);
+      `}
+    >
+      {review}
+    </Text>
+  </Box>
+);

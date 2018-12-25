@@ -33,8 +33,9 @@ const StyledTableList = styled.div`
 export const TableRow = ({ data, isHeader, style, onClick, to }) => {
   let columnStyle = isHeader
     ? {
-        textTransform: 'capitalize',
+        textTransform: 'uppercase',
         fontWeight: 'bold',
+        fontSize: '14px'
       }
     : {};
   let Container = isHeader ? Fragment : AsLink;
@@ -81,7 +82,7 @@ export const TableList = ({ data, columns, style, onRowClick, to }) => {
             data={itemValues}
             style={style}
             className="TableRow"
-            onClick={() => onRowClick(item.order)}
+            onClick={onRowClick}
             to={to}
           />
         );

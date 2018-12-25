@@ -2,7 +2,11 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { TableRow, TableList } from '../components/List';
 import SectionHeading from '../components/SectionHeading';
-import { UserDetailSection } from '../shared/reuseable';
+import {
+  UserDetailSection,
+  RatingComponent,
+  Review,
+} from '../shared/reuseable';
 
 const components = storiesOf('Components', module);
 
@@ -39,7 +43,21 @@ components.add('User Detail Compnent', () => (
       name: 'Tioluwani Kolawole',
       email: 'kolawole8tiolu@gmail.com',
       phone: '+2348078657912',
-      address: '37 Alara Street, Onike, Lagos'
+      address: '37 Alara Street, Onike, Lagos',
+    }}
+  />
+));
+
+components.add('Rating Compnent', () => <RatingComponent rating={5} />);
+components.add('Review Compnent', () => (
+  <Review
+    {...{
+      tutor: 'kolawole8tiolu@gmail.com',
+      commenter: 'kolawole8tiolu@gmail.com',
+      review:
+        'Lorem Khaled Ipsum is a major key to success. To succeed you must believe. When you believe, you will succeed. Give thanks to the most high. Surround yourself with angels. I’m giving you cloth talk, cloth. Special cloth alert, cut from a special cloth. Give thanks to the most high. Let’s see what Chef Dee got that they don’t want us to eat. Another one. Bless up. In life you have to take the trash out, if you have trash in your life, take it out, throw it away, get rid of it, major key. We don’t see them, we will never see them',
+      date: 1545045658609,
+      score: 5,
     }}
   />
 ));
