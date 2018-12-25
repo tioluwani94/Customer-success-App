@@ -16,6 +16,7 @@ const ListItemCell = styled(Box)`
   white-space: nowrap;`
       : ``}
   text-transform: ${props => (props.isCapitalized ? 'capitalize' : 'inherit')};
+  color: rgba(0,0,0,.8);
 
   @media (max-width: ${props => props.hideAt}) {
     display: none;
@@ -23,10 +24,8 @@ const ListItemCell = styled(Box)`
 `;
 
 const StyledTableList = styled.div`
-  a:last-of-type {
-    .TableRow {
-      border-bottom: none;
-    }
+  .TableRow:last-of-type {
+    border-bottom: none;
   }
 `;
 
@@ -35,7 +34,7 @@ export const TableRow = ({ data, isHeader, style, onClick, to }) => {
     ? {
         textTransform: 'uppercase',
         fontWeight: 'bold',
-        fontSize: '14px'
+        fontSize: '14px',
       }
     : {};
   let Container = isHeader ? Fragment : AsLink;
@@ -57,6 +56,7 @@ export const TableRow = ({ data, isHeader, style, onClick, to }) => {
         css={css`
           border-bottom: 1px solid #e8e8e8;
         `}
+        className="TableRow"
         px="8px"
         py="16px"
       >

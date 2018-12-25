@@ -99,6 +99,7 @@ export const UserDetailSection = ({
         alignItems="center"
         flexWrap="wrap"
         css={css`
+          color: rgba(0, 0, 0, 0.8);
           @media (max-width: 480px) {
             .user-avatar {
               display: none;
